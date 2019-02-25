@@ -1,23 +1,22 @@
-var buttons = $('#buttons > button')
+$('.imgs > img:nth-Child(1)').addClass('show')
+$('.imgs > img:nth-Child(2)').addClass('ready')
+$('.imgs > img:nth-Child(3)').addClass('ready')
 
-$(buttons).on('click',function(x){  
-  var index = $(x.currentTarget).index()
-  console.log(index)
-  var p = index * -300
-  
-    $('.images').css({
-      transform:'translate('+ p +'px)'
+n = 1
+setInterval(()=>{
+    $(`.imgs > img:nth-Child(${x(n)})`).removeClass('show').addClass('end').one('transitionend',(e)=>{
+        $(e.currentTarget).removeClass('end').addClass('ready')
     })
-    $(this).addClass('red').siblings().removeClass('red')
-})
-
-var n = 0
-console.log(n)
-setInterval(function(){
-  n += 1
-  if(n>=4){ n = 0;}
-  let p = n * -300
-  $('.images').css({
-      transform:'translate('+ p +'px)'
-    })
+    $(`.imgs > img:nth-Child(${x(n+1)})`).removeClass('ready').addClass('show')
+    n += 1
 },2000)
+
+function x(n){
+    if(n>3){
+        n = n%3
+        if(n === 0){
+            n = 3
+        }
+    }
+    return n
+}

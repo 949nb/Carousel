@@ -1,15 +1,30 @@
-.window {
-    width: 300px;
-    height: 200px;
-    border: 5px solid;
-    overflow: hidden;
-  }
-  
-  .images {
-    display: flex;
-    transition: all 1s;
-  }
-  
-  .red {
-    color: red;
-  }
+.window{
+  border: 1px solid red;
+  width: 300px;
+  height: 200px;
+  overflow: hidden;
+}
+
+.imgs {
+  display: flex;
+  position: relative;
+}
+
+.imgs > img{
+  border: 1px solid;
+  width: 300px;
+  height: 200px;
+  position: absolute;
+  transition: all 1s;
+}
+
+.ready{
+  transform: translateX(100%);
+}
+.show{
+  transform:translateX(0);
+  z-index: 1;
+}
+.end{
+  transform: translateX(-100%);
+}
