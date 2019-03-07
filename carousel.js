@@ -1,22 +1,44 @@
-$('.imgs > img:nth-Child(1)').addClass('show')
-$('.imgs > img:nth-Child(2)').addClass('ready')
-$('.imgs > img:nth-Child(3)').addClass('ready')
+$button = $('.buttons > button');
+$imgs = $('.imgs');
+$img = $imgs.children('img');
+$firstCopy = $img.eq(0).clone(true);
+$lastCopy = $img.eq($img.length-1).clone(true);
 
-n = 1
-setInterval(()=>{
-    $(`.imgs > img:nth-Child(${x(n)})`).removeClass('show').addClass('end').one('transitionend',(e)=>{
-        $(e.currentTarget).removeClass('end').addClass('ready')
+$imgs.append($firstCopy)
+$imgs.prepend($lastCopy)
+
+$imgs.css({transform:'translateX(-400px)'})
+
+index = 0
+
+$button.eq(0).on('click',function(){
+  if(index === 2){
+    $imgs.css({transform:'translateX(-1595px)'})
+    .one('transitionend',()=>{
+      $imgs.hide().offset()
+      $imgs.css({transform:'translateX(-400px)'})
+      .show()
     })
-    $(`.imgs > img:nth-Child(${x(n+1)})`).removeClass('ready').addClass('show')
-    n += 1
-},2000)
-
-function x(n){
-    if(n>3){
-        n = n%3
-        if(n === 0){
-            n = 3
-        }
-    }
-    return n
-}
+  }else{
+    $imgs.css({transform:'translateX(-400px)'})
+  }
+  index = 0
+})
+$button.eq(1).on('click',function(){
+  $imgs.css({transform:'translateX(-800px)'})
+  index = 1
+})
+$button.eq(2).on('click',function(){
+  if(index === 0){
+    $imgs.css({transform:'translateX(0px)'})
+    .one('transitionend',()=>{
+      $imgs.hide().offset()
+      $imgs.css({transform:'translateX(-1200px)'})
+      .show()
+    })
+  }else{
+    $imgs.css({transform:'translateX(-1200px)'})
+  }
+  
+  index = 2
+})
